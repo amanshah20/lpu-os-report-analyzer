@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="50" fill="#1A1A2E"/>
+  <circle cx="50" cy="50" r="42" fill="#E07B39"/>
+  <circle cx="50" cy="50" r="30" fill="#1A1A2E"/>
+  <text x="50" y="58" font-family="Arial" font-size="22" font-weight="bold" fill="white" text-anchor="middle">LPU</text>
+</svg>

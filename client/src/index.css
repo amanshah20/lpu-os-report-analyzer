@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #E07B39;
+  --color-secondary: #1A1A2E;
+  --color-accent: #F5A623;
+  --color-bg: #0F0F1A;
+  --color-surface: rgba(255, 255, 255, 0.05);
+  --color-text: #FFFFFF;
+  --color-text-muted: #A0A0B0;
+  --shadow-lpu: 0 8px 32px rgba(224, 123, 57, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #0F0F1A;
+  color: #FFFFFF;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1A1A2E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E07B39;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F5A623;
+}
+
+/* Selection */
+::selection {
+  background: rgba(224, 123, 57, 0.3);
+  color: #FFFFFF;
+}
+
+/* Glass card base */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #E07B39, #F5A623);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Orange glow */
+.glow-orange {
+  box-shadow: 0 0 20px rgba(224, 123, 57, 0.4);
+}
+
+/* Animate ring */
+@keyframes dashAnimation {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-dash {
+  animation: dashAnimation 1.5s ease-in-out forwards;
+}
+
+/* Page transition wrapper */
+.page-transition {
+  min-height: 100vh;
+}
+
+/* Custom input styles */
+.lpu-input {
+  @apply w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-text-secondary focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all duration-200;
+}
+
+.lpu-input:focus {
+  box-shadow: 0 0 0 3px rgba(224, 123, 57, 0.1);
+}
+
+/* Button styles */
+.btn-primary {
+  @apply bg-primary-500 hover:bg-primary-600 text-white font-semibold px-6 py-3 rounded-button transition-all duration-200;
+  box-shadow: 0 4px 15px rgba(224, 123, 57, 0.3);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 20px rgba(224, 123, 57, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  @apply bg-white/10 hover:bg-white/15 text-white font-semibold px-6 py-3 rounded-button border border-white/20 transition-all duration-200;
+}
+
+/* Sidebar */
+.sidebar-link {
+  @apply flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:text-white hover:bg-white/5 transition-all duration-200 cursor-pointer;
+}
+
+.sidebar-link.active {
+  @apply text-white bg-primary-500/20;
+  border-left: 3px solid #E07B39;
+}
+
+/* Progress bar animation */
+@keyframes fillBar {
+  from { width: 0%; }
+  to { width: var(--target-width); }
+}
+
+.progress-fill {
+  animation: fillBar 1s ease-out forwards;
+}
+
+/* Skeleton loading */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* Score ring animation */
+@keyframes scoreReveal {
+  from {
+    stroke-dashoffset: 339.292;
+  }
+}
+
+/* Responsive text */
+@layer utilities {
+  .text-responsive-xl {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  .text-responsive-lg {
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+}
+
+/* Toast overrides */
+.react-hot-toast {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Error boundary */
+.error-boundary {
+  @apply flex flex-col items-center justify-center min-h-screen bg-background text-white p-8;
+}
+
+/* Upload zone */
+.upload-zone {
+  @apply relative flex flex-col items-center justify-center w-full min-h-64 border-2 border-dashed border-primary-500/50 rounded-card cursor-pointer transition-all duration-300;
+  background: rgba(224, 123, 57, 0.03);
+}
+
+.upload-zone:hover,
+.upload-zone.active {
+  @apply border-primary-500;
+  background: rgba(224, 123, 57, 0.08);
+  box-shadow: 0 0 30px rgba(224, 123, 57, 0.15);
+}
+
+/* Navbar */
+.navbar {
+  @apply fixed top-0 left-0 right-0 z-50;
+  background: rgba(15, 15, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
