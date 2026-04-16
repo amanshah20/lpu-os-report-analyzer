@@ -88,6 +88,12 @@ app.use('/api/student', studentRoutes);
 app.use('/api/teacher', teacherRoutes);
 app.use('/api/report', reportRoutes);
 
+// Compatibility routes for standalone backend deployments.
+app.use('/auth', authRoutes);
+app.use('/student', studentRoutes);
+app.use('/teacher', teacherRoutes);
+app.use('/report', reportRoutes);
+
 // Root route for quick browser check
 app.get('/', (req, res) => {
   res.json({
@@ -99,6 +105,10 @@ app.get('/', (req, res) => {
 
 // Health check
 app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', message: 'LPU OS Lab Analyser API is running' });
+});
+
+app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'LPU OS Lab Analyser API is running' });
 });
 
