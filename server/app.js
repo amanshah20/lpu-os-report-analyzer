@@ -16,7 +16,19 @@ const app = express();
 // Connect once per runtime/container lifecycle.
 connectDB();
 
-const allowedOrigins = [process.env.CLIENT_URL].filter(Boolean);
+const configuredOrigins = (process.env.CLIENT_URL || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const vercelPreviewOrigin = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : null;
+
+const allowedOrigins = [...new Set([
+  ...configuredOrigins,
+  vercelPreviewOrigin,
+].filter(Boolean))];
 
 app.use(cors({
   origin: (origin, callback) => {
