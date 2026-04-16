@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const apiOrigin = import.meta.env.VITE_API_URL?.trim();
 const normalizedApiOrigin = apiOrigin
-  ? apiOrigin.replace(/\/$/, '').replace(/\/api$/, '')
+  ? apiOrigin.replace(/\/$/, '').replace(/(\/api)+$/, '')
   : '';
 const BASE_URL = normalizedApiOrigin ? `${normalizedApiOrigin}/api` : '/api';
 
