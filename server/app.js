@@ -30,13 +30,42 @@ const allowedOrigins = [...new Set([
   vercelPreviewOrigin,
 ].filter(Boolean))];
 
+const configuredVercelProjects = configuredOrigins
+  .map((origin) => {
+    try {
+      const { hostname } = new URL(origin);
+      const match = hostname.match(/^([a-z0-9-]+)\.vercel\.app$/i);
+      return match ? match[1] : null;
+    } catch {
+      return null;
+    }
+  })
+  .filter(Boolean);
+
+const isAllowedPreviewOrigin = (origin) => {
+  try {
+    const { hostname, protocol } = new URL(origin);
+    if (protocol !== 'https:') return false;
+    return configuredVercelProjects.some((project) =>
+      hostname === `${project}.vercel.app` ||
+      hostname.startsWith(`${project}-`) && hostname.endsWith('.vercel.app')
+    );
+  } catch {
+    return false;
+  }
+};
+
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) {
       return callback(null, true);
     }
 
-    if (allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+    if (
+      allowedOrigins.length === 0 ||
+      allowedOrigins.includes(origin) ||
+      isAllowedPreviewOrigin(origin)
+    ) {
       return callback(null, true);
     }
 
